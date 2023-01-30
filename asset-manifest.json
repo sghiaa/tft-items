@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/tft-items/static/css/main.596461b9.css",
+    "main.js": "/tft-items/static/js/main.b80c3ad0.js",
+    "static/js/787.f6a92acd.chunk.js": "/tft-items/static/js/787.f6a92acd.chunk.js",
+    "static/media/sparringGloves.webp": "/tft-items/static/media/sparringGloves.abbfb13f79f9aae373f2.webp",
+    "index.html": "/tft-items/index.html",
+    "main.596461b9.css.map": "/tft-items/static/css/main.596461b9.css.map",
+    "main.b80c3ad0.js.map": "/tft-items/static/js/main.b80c3ad0.js.map",
+    "787.f6a92acd.chunk.js.map": "/tft-items/static/js/787.f6a92acd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.596461b9.css",
+    "static/js/main.b80c3ad0.js"
+  ]
+}
