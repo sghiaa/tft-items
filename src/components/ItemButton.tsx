@@ -12,8 +12,8 @@ interface Props {
   targetItem: Item;
   existing: Item;
   answer: Item;
-  success: () => {};
-  failure: () => {};
+  success: () => void;
+  failure: () => void;
 }
 
 
