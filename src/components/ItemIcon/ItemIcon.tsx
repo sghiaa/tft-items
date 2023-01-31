@@ -3,11 +3,12 @@ import "./ItemIcon.css";
 
 interface Props {
   icon: string;
+  name: string;
 }
 
-const ItemIcon = ({ icon, ...rest }: Props) => {
+const ItemIcon = ({ icon, name, ...rest }: Props) => {
   return (
-    <img className="thumbnail" src={icon} {...rest} />
+    <img className="thumbnail" alt={name} src={icon} {...rest} />
   )
 }
 

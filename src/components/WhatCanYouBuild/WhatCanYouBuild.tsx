@@ -4,12 +4,11 @@ import ItemButton from '../ItemButton/ItemButton';
 import {Container, Row, Col} from 'react-bootstrap';
 import { baseItems, completedItems } from '../../data';
 import ItemIcon from '../ItemIcon/ItemIcon';
-import "./WhatsMissing.css";
 import { Link } from 'react-router-dom';
 
-const WhatsMissing = () => {
-  const item = Math.floor(Math.random()*45)
-  const component = Math.floor(Math.random()*2)
+const WhatCanYouBuild = () => {
+  const itemOne = Math.floor(Math.random()*8)
+  const itemTwo = Math.floor(Math.random()*8)
   const [streak, setStreak] = useState(0);
   const [record, setRecord] = useState(0);
   const success = () => {
@@ -38,31 +37,27 @@ const WhatsMissing = () => {
 
   return (
     <div className="App">
-      <h1>streak: {streak} (record: {record})</h1>
       <Container>
+        <h1>streak: {streak} (record: {record})</h1>
         <Row className='p-2 targetRow'>
           <Col>
-            You want: {completedItems[item].name} <ItemIcon name={completedItems[item].name} icon={completedItems[item].icon} />
-          </Col>
-        </Row>
-        <Row className='p-2'>
-          <Col>
-            You have: <ItemIcon name={baseItems[completedItems[item].components[component]].name} icon={baseItems[completedItems[item].components[component]].icon} />
+            You have: <ItemIcon name={baseItems[itemOne].name} icon={baseItems[itemOne].icon} />
+            and <ItemIcon name={baseItems[itemTwo].name} icon={baseItems[itemTwo].icon} />
           </Col>
         </Row>
         <Row className='p-4'>
-          <div className='px-2 mb-2'>Which item should you take?</div>
-          {baseItems.map((i) => {
+          <div className='px-2 mb-2'>Which item can you build?</div>
+          {completedItems.map((i) => {
             return (
               <Col key={i.id}>
-                <ItemButton answer={i} checkAnswer={() => checkAnswer(completedItems[item], baseItems[completedItems[item].components[component]], i)} />
+                <ItemButton answer={i} checkAnswer={() => checkAnswer(i, baseItems[itemOne], baseItems[itemTwo])} />
               </Col>
             )})}
         </Row>
       </Container>
-      <Link to="/what-can-you-build">What can you build?</Link>
+      <Link to="/whats-missing">Whats missing?</Link>
     </div>
   );
 }
 
-export default WhatsMissing;
+export default WhatCanYouBuild;

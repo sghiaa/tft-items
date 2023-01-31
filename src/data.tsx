@@ -53,7 +53,14 @@ import zekesHerald from "./icons/zekes-herald.webp";
 import zephyr from "./icons/zephyr.webp";
 import zzrotPortal from "./icons/zzrot-portal.webp";
 
-const baseItems = [{
+interface Item {
+  id: number;
+  name: string;
+  icon: string;
+  components?: Array<number>;
+}
+
+const baseItems: Array<Item> = [{
   id: 0,
   name: "Negatron Cloak",
   icon: negatronCloak,
@@ -98,7 +105,7 @@ const baseItems = [{
   name: "Giant's Belt",
   icon: giantsBelt,
 }];
-const completedItems = [
+const completedItems: Array<Item> = [
   {
     id: 2,
     name: "Dragon's Claw",
@@ -371,4 +378,4 @@ const completedItems = [
   },
 ];
 
-export { baseItems, completedItems };
+export { baseItems, completedItems, Item };
