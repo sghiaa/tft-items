@@ -13,11 +13,11 @@ const router = createBrowserRouter([
     element: <WhatsMissing />
   },
   {
-    path: "/whats-missing",
+    path: "/tft-items/whats-missing",
     element: <WhatsMissing />
   },
   {
-    path: "/what-can-you-build",
+    path: "/tft-items/what-can-you-build",
     element: <WhatCanYouBuild />
   },
 ]);

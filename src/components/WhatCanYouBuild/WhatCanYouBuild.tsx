@@ -55,7 +55,7 @@ const WhatCanYouBuild = () => {
             )})}
         </Row>
       </Container>
-      <Link to="/whats-missing">Whats missing?</Link>
+      <Link to="/tft-items/whats-missing">Whats missing?</Link>
     </div>
   );
 }

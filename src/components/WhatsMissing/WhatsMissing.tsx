@@ -60,7 +60,7 @@ const WhatsMissing = () => {
             )})}
         </Row>
       </Container>
-      <Link to="/what-can-you-build">What can you build?</Link>
+      <Link to="/tft-items/what-can-you-build">What can you build?</Link>
     </div>
   );
 }
