@@ -1,5 +1,6 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
+import ItemIcon from "../ItemIcon/ItemIcon";
 
 interface Item {
   id: number;
@@ -30,8 +31,8 @@ const checkAnswer = (targetItem, existing, answer, success, failure) => {
 
 const ItemButton = ({ targetItem, existing, answer, success, failure}: Props) => {
   return (
-    <Button onClick={() => checkAnswer(targetItem, existing, answer, success, failure)}>
-      <img src={answer.icon} />
+    <Button className="p-0" onClick={() => checkAnswer(targetItem, existing, answer, success, failure)}>
+      <ItemIcon icon={answer.icon} />
     </Button>
   )
 }

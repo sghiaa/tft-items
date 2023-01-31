@@ -1,5 +1,5 @@
 import './App.css';
-import WhatsMissing from './components/WhatsMissing';
+import WhatsMissing from './components/WhatsMissing/WhatsMissing';
 
 
 function App() {
