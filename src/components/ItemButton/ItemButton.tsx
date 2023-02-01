@@ -12,7 +12,7 @@ interface Props {
 
 const ItemButton = ({ answer, checkAnswer}: Props) => {
   return (
-    <Button className="p-0" onClick={() => checkAnswer()}>
+    <Button className="p-0 m-1" onClick={() => checkAnswer()}>
       <ItemIcon name={answer.name} icon={answer.icon} />
     </Button>
   )

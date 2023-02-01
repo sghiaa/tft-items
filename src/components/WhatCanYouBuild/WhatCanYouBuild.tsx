@@ -37,19 +37,23 @@ const WhatCanYouBuild = () => {
 
   return (
     <div className="App">
-      <Container>
-        <h1>streak: {streak} (record: {record})</h1>
-        <Row className='p-2 targetRow'>
-          <Col>
-            You have: <ItemIcon name={baseItems[itemOne].name} icon={baseItems[itemOne].icon} />
-            and <ItemIcon name={baseItems[itemTwo].name} icon={baseItems[itemTwo].icon} />
+      <Container className="gameArea">
+        <Row>
+          <Col xs={12}>
+            <h1 className='streak'>streak: {streak} (record: {record})</h1>
           </Col>
         </Row>
-        <Row className='p-4'>
+        <Row className='p-2 targetRow'>
+          <Col xs={12} className="question">
+            You have: <ItemIcon name={baseItems[itemOne].name} icon={baseItems[itemOne].icon} />
+            &nbsp;and <ItemIcon name={baseItems[itemTwo].name} icon={baseItems[itemTwo].icon} />
+          </Col>
+        </Row>
+        <Row className='p-4 itemChoices'>
           <div className='px-2 mb-2'>Which item can you build?</div>
           {completedItems.map((i) => {
             return (
-              <Col key={i.id}>
+              <Col key={i.id} xs={3} sm={2} md={1}>
                 <ItemButton answer={i} checkAnswer={() => checkAnswer(i, baseItems[itemOne], baseItems[itemTwo])} />
               </Col>
             )})}

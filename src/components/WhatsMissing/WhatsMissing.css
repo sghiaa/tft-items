@@ -3,3 +3,22 @@
   color: black;
   border-radius: .5rem;
 }
+
+.itemChoices {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.streak {
+  width: 100%;
+}
+.question {
+  font-size: 16pt;
+}
+
+.gameArea {
+  border-radius: .5rem;
+  padding: 2rem;
+}

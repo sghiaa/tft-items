@@ -41,12 +41,10 @@ const WhatsMissing = () => {
       <h1>streak: {streak} (record: {record})</h1>
       <Container>
         <Row className='p-2 targetRow'>
-          <Col>
+          <Col xs={7} style={{"textAlign": "right"}} className="p-2">
             You want: {completedItems[item].name} <ItemIcon name={completedItems[item].name} icon={completedItems[item].icon} />
           </Col>
-        </Row>
-        <Row className='p-2'>
-          <Col>
+          <Col xs={7} style={{"textAlign": "right"}} className="p-2">
             You have: <ItemIcon name={baseItems[completedItems[item].components[component]].name} icon={baseItems[completedItems[item].components[component]].icon} />
           </Col>
         </Row>
