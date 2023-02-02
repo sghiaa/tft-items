@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tft-items/static/css/main.b3546c44.css",
-    "main.js": "/tft-items/static/js/main.6b657803.js",
+    "main.js": "/tft-items/static/js/main.ad53a85e.js",
     "static/js/787.f6a92acd.chunk.js": "/tft-items/static/js/787.f6a92acd.chunk.js",
     "static/media/guardbreaker.webp": "/tft-items/static/media/guardbreaker.4a359d81341ad138d6d7.webp",
     "static/media/fimbulwinter.webp": "/tft-items/static/media/fimbulwinter.e9be27fdd6dd6a757155.webp",
@@ -50,11 +50,11 @@
     "static/media/thiefs-gloves.webp": "/tft-items/static/media/thiefs-gloves.df3f57a09d95237f820c.webp",
     "index.html": "/tft-items/index.html",
     "main.b3546c44.css.map": "/tft-items/static/css/main.b3546c44.css.map",
-    "main.6b657803.js.map": "/tft-items/static/js/main.6b657803.js.map",
+    "main.ad53a85e.js.map": "/tft-items/static/js/main.ad53a85e.js.map",
     "787.f6a92acd.chunk.js.map": "/tft-items/static/js/787.f6a92acd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b3546c44.css",
-    "static/js/main.6b657803.js"
+    "static/js/main.ad53a85e.js"
   ]
 }
