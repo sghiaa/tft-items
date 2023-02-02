@@ -54,12 +54,19 @@ const WhatCanYouBuild = () => {
           {completedItems.map((i) => {
             return (
               <Col key={i.id} xs={3} sm={2} md={1}>
-                <ItemButton answer={i} checkAnswer={() => checkAnswer(i, baseItems[itemOne], baseItems[itemTwo])} />
+                <ItemButton answer={i} onClick={() => checkAnswer(i, baseItems[itemOne], baseItems[itemTwo])} />
               </Col>
             )})}
         </Row>
       </Container>
-      <Link to="/tft-items/whats-missing">Whats missing?</Link>
+      <ul>
+        <li>
+          <Link to="/tft-items/whats-missing">Whats missing?</Link>
+        </li>
+        <li>
+          <Link to="/tft-items/item-combos">Item combos</Link>
+        </li>
+      </ul>
     </div>
   );
 }

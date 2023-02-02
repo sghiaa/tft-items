@@ -5,14 +5,14 @@ import ItemIcon from "../ItemIcon/ItemIcon";
 
 interface Props {
   answer: Item;
-  checkAnswer: () => void;
+  onClick: () => void;
 }
 
 
 
-const ItemButton = ({ answer, checkAnswer}: Props) => {
+const ItemButton = ({ answer, onClick}: Props) => {
   return (
-    <Button className="p-0 m-1" onClick={() => checkAnswer()}>
+    <Button className="p-0 m-1" onClick={() => onClick()}>
       <ItemIcon name={answer.name} icon={answer.icon} />
     </Button>
   )

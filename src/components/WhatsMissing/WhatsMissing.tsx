@@ -53,12 +53,19 @@ const WhatsMissing = () => {
           {baseItems.map((i) => {
             return (
               <Col key={i.id}>
-                <ItemButton answer={i} checkAnswer={() => checkAnswer(completedItems[item], baseItems[completedItems[item].components[component]], i)} />
+                <ItemButton answer={i} onClick={() => checkAnswer(completedItems[item], baseItems[completedItems[item].components[component]], i)} />
               </Col>
             )})}
         </Row>
       </Container>
-      <Link to="/tft-items/what-can-you-build">What can you build?</Link>
+      <ul>
+      <li>
+        <Link to="/tft-items/what-can-you-build">What can you build?</Link>
+      </li>
+      <li>
+        <Link to="/tft-items/item-combos">Item combos</Link>
+      </li>
+      </ul>
     </div>
   );
 }

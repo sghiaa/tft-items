@@ -6,6 +6,7 @@ import {
 import Header from './components/Header/Header';
 import WhatsMissing from './components/WhatsMissing/WhatsMissing';
 import WhatCanYouBuild from './components/WhatCanYouBuild/WhatCanYouBuild';
+import ItemCombos from './components/ItemCombos/ItemCombos';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/tft-items/what-can-you-build",
     element: <WhatCanYouBuild />
+  },
+  {
+    path: "/tft-items/item-combos",
+    element: <ItemCombos />
   },
 ]);
 
