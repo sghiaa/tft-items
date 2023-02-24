@@ -10,6 +10,7 @@ import ItemIcon from "../ItemIcon/ItemIcon";
 const ItemCombos = () => {
   const [items, setItems] = useState<Array<Item>>([]);
   const [buildable, setBuildable] = useState<Set<Item>>([]);
+  // const [targetable, setTargetable] = useState<Set<Item>>([]);
 
   let recipes = {};
   for(let i = 0; i < baseItems.length; i++) {
@@ -31,18 +32,19 @@ const ItemCombos = () => {
   }
 
   useEffect(() => {
-    let temp: Set<Item> = new Set;
+    let build: Set<Item> = new Set;
+    let target: Set<Item> = new Set;
     for(let i = 0; i < items.length; i++) {
       for(let j = i + 1; j < items.length; j++) {
-        temp.add(recipes[items[i].id][items[j].id])
+        build.add(recipes[items[i].id][items[j].id])
       }
     }
-    setBuildable(temp);
+    setBuildable(build);
   }, [items]);
 
   return (
     <Container>
-      <Row>
+      <Row className="m-2">
         <Col xs={6} style={{ backgroundColor: "aquamarine", color: "black", borderRadius: ".5rem"}}>
           <div>
             Which items do you have?
@@ -71,7 +73,7 @@ const ItemCombos = () => {
           </Row>
         </Col>
       </Row>
-      <Row>
+      <Row className="p-2 m-2" style={{ backgroundColor: "#AAFAFA", borderRadius: ".5rem", color: "black" }}>
         <Col>
             <div>
               You can build:
@@ -79,7 +81,7 @@ const ItemCombos = () => {
             <Row>
               {Array.from(buildable).map((i, index) => {
                 return (
-                  <Col xs={2} key={index}>
+                  <Col className="m-2" xs={2} key={index}>
                     <ItemIcon icon={i.icon} name={i.name} />
                   </Col>
                 )
@@ -87,6 +89,22 @@ const ItemCombos = () => {
             </Row>
         </Col>
       </Row>
+      {/* <Row className="p-2 m-2" style={{ backgroundColor: "#FAFAFA", borderRadius: ".5rem", color: "black" }}>
+        <Col>
+            <div>
+              You could target:
+            </div>
+            <Row>
+              {Array.from(targetable).map((i, index) => {
+                return (
+                  <Col className="m-2" xs={2} key={index}>
+                    <ItemIcon icon={i.icon} name={i.name} />
+                  </Col>
+                )
+              })}
+            </Row>
+        </Col>
+      </Row> */}
       <ul>
         <li>
           <Link to="/tft-items/whats-missing">Whats missing?</Link>

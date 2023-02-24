@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import WhatsMissing from './components/WhatsMissing/WhatsMissing';
 import WhatCanYouBuild from './components/WhatCanYouBuild/WhatCanYouBuild';
 import ItemCombos from './components/ItemCombos/ItemCombos';
+import TeamComps from './components/TeamComps/TeamComps';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/tft-items/item-combos",
     element: <ItemCombos />
+  },
+  {
+    path: "/tft-items/team-comps",
+    element: <TeamComps />
   },
 ]);
 
