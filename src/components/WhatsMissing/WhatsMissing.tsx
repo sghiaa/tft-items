@@ -4,8 +4,9 @@ import ItemButton from '../ItemButton/ItemButton';
 import { Container, Row, Col } from 'react-bootstrap';
 import { baseItems, completedItems } from '../../data';
 import ItemIcon from '../ItemIcon/ItemIcon';
-import './WhatsMissing.css';
+import styles from './WhatsMissing.module.css';
 import { Link } from 'react-router-dom';
+import Footer from '../Footer/Footer';
 
 const WhatsMissing = () => {
   const item = Math.floor(Math.random() * 45);
@@ -45,7 +46,7 @@ const WhatsMissing = () => {
       </h1>
 
       <Container>
-        <Row className="p-2 targetRow">
+        <Row className={`${styles.targetRow} p-2`}>
           <Col xs={7} style={{ textAlign: 'right' }} className="p-2">
             You want: {completedItems[item].name} <ItemIcon name={completedItems[item].name} icon={completedItems[item].icon} />
           </Col>
@@ -67,16 +68,9 @@ const WhatsMissing = () => {
           })}
         </Row>
       </Container>
-
-      <ul>
-        <li>
-          <Link to="/tft-items/what-can-you-build">What can you build?</Link>
-        </li>
-
-        <li>
-          <Link to="/tft-items/item-combos">Item combos</Link>
-        </li>
-      </ul>
+      <div>
+        <Footer page="whats-missing" />
+      </div>
     </div>
   );
 };

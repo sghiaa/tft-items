@@ -2,27 +2,23 @@ import React from "react"
 import { useEffect } from "react";
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { baseItems, completedItems, Item } from '../../data';
+import { baseItems, CompletedItem, completedItems, Component } from '../../data';
+import Footer from "../Footer/Footer";
 import ItemButton from "../ItemButton/ItemButton";
-import ItemIcon from "../ItemIcon/ItemIcon";
 
 const ItemCombos = () => {
-  const [items, setItems] = useState<Array<Item>>([]);
-  const [buildable, setBuildable] = useState<Set<Item>>([]);
-  // const [targetable, setTargetable] = useState<Set<Item>>([]);
-
-  let recipes = {};
-  for(let i = 0; i < baseItems.length; i++) {
-    recipes[i] = {};
-  }
+  const [items, setItems] = useState<Array<Component>>([]);
+  const [buildable, setBuildable] = useState<Set<CompletedItem>>(new Set());
+  const [reservedItems, setReservedItems] = useState<Array<CompletedItem>>([])
+  
+  const recipes = baseItems.reduce((acc, item) => ({ ...acc, [item.id]: {} }), {});
 
   for(let i = 0; i < completedItems.length; i++) {
     recipes[completedItems[i].components![0]][completedItems[i].components![1]] = completedItems[i];
     recipes[completedItems[i].components![1]][completedItems[i].components![0]] = completedItems[i];
   }
 
-  const addItem = (item: Item) => {
+  const addItem = (item: Component) => {
     setItems([item, ...items]);
   }
   const removeItem = (index: number) => {
@@ -30,16 +26,32 @@ const ItemCombos = () => {
     temp.splice(index, 1)
     setItems(temp);
   }
+  const reserveComponents = (target: CompletedItem) => {
+    setReservedItems(reservedItems.concat(target));
+    const itemsToRemove = target.components.map((componentIndex) => baseItems[componentIndex]);
+    let temp = [...items]
+    temp.splice(items.indexOf(itemsToRemove[0]), 1);
+    temp.splice(items.indexOf(itemsToRemove[1]), 1);
+    setItems(temp)
+  };
 
+  const removeReserved = (index: number) => {
+    let temp = [...reservedItems];
+    temp.splice(index, 1)
+    
+    const itemsToAdd = reservedItems[index].components.map((componentIndex) => baseItems[componentIndex]);
+    setItems(itemsToAdd.concat([...items]));
+
+    setReservedItems(temp);
+  }
+  
   useEffect(() => {
-    let build: Set<Item> = new Set;
-    let target: Set<Item> = new Set;
-    for(let i = 0; i < items.length; i++) {
-      for(let j = i + 1; j < items.length; j++) {
-        build.add(recipes[items[i].id][items[j].id])
-      }
-    }
-    setBuildable(build);
+    const updateBuildable = (newItems: Component[]) => {
+      const build = newItems.flatMap((item1, i) => newItems.slice(i + 1).map((item2) => recipes[item1.id][item2.id]));
+      setBuildable(new Set(build));
+    };
+
+    updateBuildable(items);
   }, [items]);
 
   return (
@@ -82,37 +94,34 @@ const ItemCombos = () => {
               {Array.from(buildable).map((i, index) => {
                 return (
                   <Col className="m-2" xs={2} key={index}>
-                    <ItemIcon icon={i.icon} name={i.name} />
+                    {/* <ItemIcon icon={i.icon} name={i.name} /> */}
+                    <ItemButton answer={i} onClick={() => reserveComponents(i)} />
+
                   </Col>
                 )
               })}
             </Row>
         </Col>
       </Row>
-      {/* <Row className="p-2 m-2" style={{ backgroundColor: "#FAFAFA", borderRadius: ".5rem", color: "black" }}>
+      <Row className="p-2 m-2" style={{ backgroundColor: "#AAFAFA", borderRadius: ".5rem", color: "black" }}>
         <Col>
             <div>
-              You could target:
+              You have built:
             </div>
             <Row>
-              {Array.from(targetable).map((i, index) => {
+              {Array.from(reservedItems).map((i, index) => {
                 return (
                   <Col className="m-2" xs={2} key={index}>
-                    <ItemIcon icon={i.icon} name={i.name} />
+                    <ItemButton answer={i} onClick={() => removeReserved(index)} />
                   </Col>
                 )
               })}
             </Row>
         </Col>
-      </Row> */}
-      <ul>
-        <li>
-          <Link to="/tft-items/whats-missing">Whats missing?</Link>
-        </li>
-        <li>
-          <Link to="/tft-items/what-can-you-build">What can you build?</Link>
-        </li>
-      </ul>
+      </Row>
+      <div>
+        <Footer page="item-combos" />
+      </div>
     </Container>
   )
 }

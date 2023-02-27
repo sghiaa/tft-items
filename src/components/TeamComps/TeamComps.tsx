@@ -5,6 +5,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import ItemIcon from '../ItemIcon/ItemIcon';
 import { Link } from 'react-router-dom';
 import Papa from 'papaparse';
+import Footer from '../Footer/Footer';
 
 type Tag = "gadgeteen" |
   "heart" |
@@ -222,14 +223,9 @@ const TeamComps = () => {
           }
         </Row>
       </Container>
-      <ul>
-        <li>
-          <Link to="/tft-items/whats-missing">Whats missing?</Link>
-        </li>
-        <li>
-          <Link to="/tft-items/item-combos">Item combos</Link>
-        </li>
-      </ul>
+      <div>
+        <Footer page="team-comps" />
+      </div>
     </div>
   );
 }
