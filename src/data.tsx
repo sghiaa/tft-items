@@ -1,58 +1,3 @@
-import giantsBelt from "./icons/1011.png";
-import chainVest from "./icons/1031.png";
-import bfSword from "./icons/1038.png";
-import recurveBow from "./icons/1043.png";
-import negatronCloak from "./icons/1057.png";
-import needlesslyLargeRod from "./icons/1058.png";
-import tearOfTheGoddess from "./icons/3070.png";
-import spatula from "./icons/4403.png";
-import sparringGloves from "./icons/sparringGloves.webp";
-import adminEmblem from "./icons/a.webp";
-import animaSquadEmblem from "./icons/anima-squad-emblem.webp";
-import archangelsStaff from "./icons/archangels-staff.webp";
-import bloodthirster from "./icons/bloodthirster.webp";
-import blueBuff from "./icons/blue-buff.webp";
-import brambleVest from "./icons/bramble-vest.webp";
-import chaliceOfPower from "./icons/chalice-of-power.webp";
-import deathblade from "./icons/deathblade.webp";
-import dragonsClaw from "./icons/dragons-claw.webp";
-import duelistEmblem from "./icons/duelist-emblem.webp";
-import edgeOfNight from "./icons/edge-of-night.webp";
-import protectorsVow from "./icons/fimbulwinter.webp";
-import gargoyleStoneplate from "./icons/gargoyle-stoneplate.webp";
-import giantSlayer from "./icons/giant-slayer.webp";
-import guardbreaker from "./icons/guardbreaker.webp";
-import guinsoosRageblade from "./icons/guinsoos-rageblade.webp";
-import handOfJustice from "./icons/hand-of-justice.png";
-import heartEmblem from "./icons/heart-emblem.webp";
-import hextechGunblade from "./icons/hextech-gunblade.webp";
-import infinityEdge from "./icons/infinity-edge.webp";
-import ionicSpark from "./icons/ionic-spark.webp";
-import jeweledGauntlet from "./icons/jeweled-gauntlet.webp";
-import laserCorpsEmblem from "./icons/laser-corps-emblem.webp";
-import lastWhisper from "./icons/last-whisper.webp";
-import locketOfTheIronSolari from "./icons/locket-of-the-iron-solari.webp";
-import mascotEmblem from "./icons/mascot-emblem.webp";
-import morellonomicon from "./icons/morellonomicon.webp";
-import oxForceEmblem from "./icons/ox-force-emblem.webp";
-import quicksilver from "./icons/quicksilver.webp";
-import rabadonsDeathcap from "./icons/rabadons-deathcap.webp";
-import rapidfireCannon from "./icons/rapid-firecannon.webp";
-import redemption from "./icons/redemption.webp";
-import renegadeEmblem from "./icons/renegade-emblem.webp";
-import runaansHurricane from "./icons/runaans-hurricane.webp";
-import shroudOfStillness from "./icons/shroud-of-stillness.webp";
-import spearOfShojin from "./icons/spear-of-shojin2.webp";
-import statikkShiv from "./icons/statikk-shiv.webp";
-import sunfireCape from "./icons/sunfire-cape.webp";
-import tacticiansCrown from "./icons/tacticians-crown.webp";
-import thiefsGloves from "./icons/thiefs-gloves.webp";
-import titansResolve from "./icons/titans-resolve.webp";
-import warmogsArmor from "./icons/warmogs-armor.webp";
-import zekesHerald from "./icons/zekes-herald.webp";
-import zephyr from "./icons/zephyr.webp";
-import zzrotPortal from "./icons/zzrot-portal.webp";
-
 interface Component {
   id: number;
   name: string;
@@ -66,322 +11,557 @@ interface CompletedItem {
   components: Array<number>;
 }
 
-const baseItems: Array<Component> = [{
-  id: 0,
-  name: "Negatron Cloak",
-  icon: negatronCloak,
-},
-{
-  id: 1,
-  name: "B. F. Sword",
-  icon: bfSword,
-},
-{
-  id: 2,
-  name: "Chain Vest",
-  icon: chainVest,
-},
-{
-  id: 3,
-  name: "Needlessly Large Rod",
-  icon: needlesslyLargeRod,
-},
-{
-  id: 4,
-  name: "Recurve Bow",
-  icon: recurveBow,
-},
-{
-  id: 5,
-  name: "Sparring Gloves",
-  icon: sparringGloves,
-},
-{
-  id: 6,
-  name: "Spatula",
-  icon: spatula,
-},
-{
-  id: 7,
-  name: "Tear of the Goddess",
-  icon: tearOfTheGoddess,
-},
-{
-  id: 8,
-  name: "Giant's Belt",
-  icon: giantsBelt,
-}];
-const completedItems: Array<CompletedItem> = [
+type Item = Component | CompletedItem;
+
+const baseItems: Array<Component> = [
   {
-    id: 2,
-    name: "Dragon's Claw",
-    icon: dragonsClaw,
-    components: [0, 0],
+    "id": 0,
+    "name": "Negatron Cloak",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_negatroncloak.png"
   },
   {
-    id: 20,
-    name: "Bloodthirster",
-    components: [0, 1],
-    icon: bloodthirster,
+    "id": 1,
+    "name": "B.F. Sword",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bfsword.png"
   },
   {
-    id: 23,
-    name: "Gargoyle Stoneplate",
-    components: [0, 2],
-    icon: gargoyleStoneplate,
+    "id": 2,
+    "name": "Chain Vest",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_chainvest.png"
   },
   {
-    id: 27,
-    name: "Ionic Spark",
-    components: [0, 3],
-    icon: ionicSpark,
+    "id": 3,
+    "name": "Needlessly Large Rod",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_needlesslylargerod.png"
   },
   {
-    id: 13,
-    name: "Runaan's Hurricane",
-    components: [0, 4],
-    icon: runaansHurricane,
+    "id": 4,
+    "name": "Recurve Bow",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_recurvebow.png"
   },
   {
-    id: 42,
-    name: "Quicksilver",
-    components: [0, 5],
-    icon: quicksilver,
+    "id": 5,
+    "name": "Sparring Gloves",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_sparringgloves.png"
   },
   {
-    id: 19,
-    name: "A.D.M.I.N. Emblem",
-    components: [0, 6],
-    icon: adminEmblem,
+    "id": 6,
+    "name": "Spatula",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spatula.png"
   },
   {
-    id: 39,
-    name: "Chalice of Power",
-    components: [0, 7],
-    icon: chaliceOfPower,
+    "id": 7,
+    "name": "Tear of the Goddess",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_tearofthegoddess.png"
   },
   {
-    id: 44,
-    name: "Zephyr",
-    components: [0, 8],
-    icon: zephyr,
+    "id": 8,
+    "name": "Giant's Belt",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_giantsbelt.png"
   },
   {
-    id: 22,
-    name: "Deathblade",
-    components: [1, 1],
-    icon: deathblade,
-  },
-  {
-    id: 4,
-    name: "Edge of Night",
-    components: [1, 2],
-    icon: edgeOfNight,
-  },
-  {
-    id: 25,
-    name: "Hextech Gunblade",
-    components: [1, 3],
-    icon: hextechGunblade,
-  },
-  {
-    id: 5,
-    name: "Giant Slayer",
-    components: [1, 4],
-    icon: giantSlayer,
-  },
-  {
-    id: 26,
-    name: "Infinity Edge",
-    components: [1, 5],
-    icon: infinityEdge,
-  },
-  {
-    id: 41,
-    name: "Laser Corps Emblem",
-    components: [1, 6],
-    icon: laserCorpsEmblem,
-  },
-  {
-    id: 15,
-    name: "Spear of Shojin",
-    components: [1, 7],
-    icon: spearOfShojin,
-  },
-  {
-    id: 36,
-    name: "Zeke's Herald",
-    components: [1, 8],
-    icon: zekesHerald,
-  },
-  {
-    id: 21,
-    name: "Bramble Vest",
-    components: [2, 2],
-    icon: brambleVest,
-  },
-  {
-    id: 10,
-    name: "Locket of the Iron Solari",
-    components: [2, 3],
-    icon: locketOfTheIronSolari,
-  },
-  {
-    id: 35,
-    name: "Titan's Resolve",
-    components: [2, 4],
-    icon: titansResolve,
-  },
-  {
-    id: 14,
-    name: "Shroud of Stillness",
-    components: [2, 5],
-    icon: shroudOfStillness,
-  },
-  {
-    id: 29,
-    name: "Ox Force Emblem",
-    components: [2, 6],
-    icon: oxForceEmblem,
-  },
-  {
-    id: 30,
-    name: "Protector's Vow",
-    components: [2, 7],
-    icon: protectorsVow,
-  },
-  {
-    id: 34,
-    name: "Sunfire Cape",
-    components: [2, 8],
-    icon: sunfireCape,
-  },
-  {
-    id: 31,
-    name: "Rabadon's Deathcap",
-    components: [3, 3],
-    icon: rabadonsDeathcap,
-  },
-  {
-    id: 7,
-    name: "Guinsoo's Rageblade",
-    components: [3, 4],
-    icon: guinsoosRageblade,
-  },
-  {
-    id: 8,
-    name: "Jeweled Gauntlet",
-    components: [3, 5],
-    icon: jeweledGauntlet,
-  },
-  {
-    id: 0,
-    name: "Anima Squad Emblem",
-    components: [3, 6],
-    icon: animaSquadEmblem,
-  },
-  {
-    id: 38,
-    name: "Archangel's Staff",
-    components: [3, 7],
-    icon: archangelsStaff,
-  },
-  {
-    id: 28,
-    name: "Morellonomicon",
-    components: [3, 8],
-    icon: morellonomicon,
-  },
-  {
-    id: 43,
-    name: "Rapid Firecannon",
-    components: [4, 4],
-    icon: rapidfireCannon,
-  },
-  {
-    id: 9,
-    name: "Last Whisper",
-    components: [4, 5],
-    icon: lastWhisper,
-  },
-  {
-    id: 3,
-    name: "Duelist Emblem",
-    components: [4, 6],
-    icon: duelistEmblem,
-  },
-  {
-    id: 33,
-    name: "Statikk Shiv",
-    components: [4, 7],
-    icon: statikkShiv,
-  },
-  {
-    id: 37,
-    name: "Zz'Rot Portal",
-    components: [4, 8],
-    icon: zzrotPortal,
-  },
-  {
-    id: 17,
-    name: "Thief's Gloves",
-    components: [5, 5],
-    icon: thiefsGloves,
-  },
-  {
-    id: 12,
-    name: "Renegade Emblem",
-    components: [5, 6],
-    icon: renegadeEmblem,
-  },
-  {
-    id: 40,
-    name: "Hand of Justice",
-    components: [5, 7],
-    icon: handOfJustice,
-  },
-  {
-    id: 6,
-    name: "Guardbreaker",
-    components: [5, 8],
-    icon: guardbreaker,
-  },
-  {
-    id: 16,
-    name: "Tactician's Crown",
-    components: [6, 6],
-    icon: tacticiansCrown,
-  },
-  {
-    id: 24,
-    name: "Heart Emblem",
-    components: [6, 7],
-    icon: heartEmblem,
-  },
-  {
-    id: 11,
-    name: "Mascot Emblem",
-    components: [6, 8],
-    icon: mascotEmblem,
-  },
-  {
-    id: 1,
-    name: "Blue Buff",
-    components: [7, 7],
-    icon: blueBuff,
-  },
-  {
-    id: 32,
-    name: "Redemption",
-    components: [7, 8],
-    icon: redemption,
-  },
-  {
-    id: 18,
-    name: "Warmog's Armor",
-    components: [8, 8],
-    icon: warmogsArmor,
-  },
+    "id": 9,
+    "name": "Frying Pan",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_fryingpan.png"
+  }
 ];
 
-export { baseItems, completedItems, Component, CompletedItem };
+const completedItems: Array<CompletedItem> = [
+  {
+    "id": 0,
+    "name": "Dragon's Claw",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_dragonsclaw.png",
+    "components": [
+      0,
+      0
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Bloodthirster",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bloodthirster.png",
+    "components": [
+      1,
+      0
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Gargoyle Stoneplate",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_gargoylestoneplate.png",
+    "components": [
+      2,
+      0
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Ionic Spark",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_ionicspark.png",
+    "components": [
+      3,
+      0
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Kraken's Fury",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_krakenslayer.png",
+    "components": [
+      0,
+      4
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Quicksilver",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_quicksilver.png",
+    "components": [
+      5,
+      0
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Adaptive Helm",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_adaptivehelm.png",
+    "components": [
+      0,
+      7
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Protector's Vow",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_frozenheart.png",
+    "components": [
+      7,
+      2
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Bramble Vest",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bramblevest.png",
+    "components": [
+      2,
+      2
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Crownguard",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_crownguard.png",
+    "components": [
+      3,
+      2
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Titan's Resolve",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_titansresolve.png",
+    "components": [
+      2,
+      4
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Sunfire Cape",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_redbuff.png",
+    "components": [
+      2,
+      8
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Rabadon's Deathcap",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rabadonsdeathcap.png",
+    "components": [
+      3,
+      3
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Archangel's Staff",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_archangelsstaff.png",
+    "components": [
+      3,
+      7
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Morellonomicon",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_morellonomicon.png",
+    "components": [
+      3,
+      8
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Guinsoo's Rageblade",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guinsoosrageblade.png",
+    "components": [
+      4,
+      3
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Jeweled Gauntlet",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_jeweledgauntlet.png",
+    "components": [
+      3,
+      5
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Deathblade",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_deathblade.png",
+    "components": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Edge of Night",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_guardianangel.png",
+    "components": [
+      1,
+      2
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Hextech Gunblade",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_hextechgunblade.png",
+    "components": [
+      1,
+      3
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Giant Slayer",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_madredsbloodrazor.png",
+    "components": [
+      1,
+      4
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Infinity Edge",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_infinityedge.png",
+    "components": [
+      1,
+      5
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Spear of Shojin",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spearofshojin.png",
+    "components": [
+      1,
+      7
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Sterak's Gage",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_steraksgage.png",
+    "components": [
+      1,
+      8
+    ]
+  },
+  {
+    "id": 24,
+    "name": "Last Whisper",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_lastwhisper.png",
+    "components": [
+      4,
+      5
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Nashor's Tooth",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_leviathan.png",
+    "components": [
+      4,
+      8
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Red Buff",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_rapidfirecannon.png",
+    "components": [
+      4,
+      4
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Void Staff",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_voidstaff.png",
+    "components": [
+      4,
+      7
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Thief's Gloves",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_thiefsgloves.png",
+    "components": [
+      5,
+      5
+    ]
+  },
+  {
+    "id": 29,
+    "name": "Hand Of Justice",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_unstableconcoction.png",
+    "components": [
+      7,
+      5
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Striker's Flail",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_powergauntlet.png",
+    "components": [
+      8,
+      5
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Blue Buff",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_bluebuff.png",
+    "components": [
+      7,
+      7
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Spirit Visage",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spiritvisagerr.png",
+    "components": [
+      7,
+      8
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Warmog's Armor",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_warmogsarmor.png",
+    "components": [
+      8,
+      8
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Steadfast Heart",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_nightharvester.png",
+    "components": [
+      2,
+      5
+    ]
+  },
+  {
+    "id": 35,
+    "name": "Evenshroud",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_spectralgauntlet.png",
+    "components": [
+      0,
+      8
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Tactician's Crown",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_forceofnature.png",
+    "components": [
+      6,
+      6
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Tactician's Cape",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_tacticiansring.png",
+    "components": [
+      6,
+      9
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Tactician's Shield",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/tft/icons/items/hexcore/tft_item_tacticiansscepter.png",
+    "components": [
+      9,
+      9
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Arbiter Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_arbiter.png",
+    "components": [
+      6,
+      0
+    ]
+  },
+  {
+    "id": 40,
+    "name": "Timebreaker Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_timebreaker.png",
+    "components": [
+      6,
+      4
+    ]
+  },
+  {
+    "id": 41,
+    "name": "N.O.V.A. Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_nova.png",
+    "components": [
+      6,
+      5
+    ]
+  },
+  {
+    "id": 42,
+    "name": "Meeple Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_meeple.png",
+    "components": [
+      6,
+      2
+    ]
+  },
+  {
+    "id": 43,
+    "name": "Stargazer Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_stargazer.png",
+    "components": [
+      6,
+      3
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Dark Star Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_darkstar.png",
+    "components": [
+      6,
+      1
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Space Groove Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_spacegroove.png",
+    "components": [
+      6,
+      7
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Primordian Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_primordian.png",
+    "components": [
+      6,
+      8
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Vanguard Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_vanguard.png",
+    "components": [
+      9,
+      0
+    ]
+  },
+  {
+    "id": 48,
+    "name": "Shepherd Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_sheperd.png",
+    "components": [
+      9,
+      7
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Brawler Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_brawler.png",
+    "components": [
+      9,
+      8
+    ]
+  },
+  {
+    "id": 50,
+    "name": "Rogue Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_rogue.png",
+    "components": [
+      9,
+      5
+    ]
+  },
+  {
+    "id": 51,
+    "name": "Challenger Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_challenger.png",
+    "components": [
+      9,
+      4
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Marauder Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_marauder.png",
+    "components": [
+      9,
+      1
+    ]
+  },
+  {
+    "id": 53,
+    "name": "Bastion Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_bastion.png",
+    "components": [
+      9,
+      2
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Voyager Emblem",
+    "icon": "https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/traits/spatula/set17/tft17_emblem_voyager.png",
+    "components": [
+      9,
+      3
+    ]
+  }
+];
+
+export { baseItems, completedItems, Component, CompletedItem, Item };

@@ -1,24 +1,19 @@
-.targetRow {
-  background-color: aquamarine;
-  color: black;
-  border-radius: .5rem;
+.choiceRow {
+  row-gap: 0.85rem;
 }
 
-.itemChoices {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
-.streak {
-  width: 100%;
-}
-.question {
-  font-size: 16pt;
+.pageCard {
+  background: var(--app-panel);
+  border: 1px solid rgba(151, 188, 255, 0.16);
+  border-radius: 26px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+  padding: 1.3rem;
 }
 
-.gameArea {
-  border-radius: .5rem;
-  padding: 2rem;
+.promptCard {
+  background: linear-gradient(135deg, rgba(255, 190, 84, 0.14), rgba(78, 144, 255, 0.12));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  margin-bottom: 1rem;
+  padding: 1rem 1.1rem;
 }
