@@ -1,0 +1,198 @@
+.championConnectionsPage {
+  display: grid;
+  gap: 1rem;
+}
+
+.championConnections-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.championConnections-difficulty {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.championConnections-difficultyTabs {
+  background: rgba(6, 10, 20, 0.72);
+  border: 1px solid rgba(148, 196, 255, 0.18);
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 0.3rem;
+  padding: 0.3rem;
+}
+
+.championConnections-difficultyTab {
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  color: var(--app-muted);
+  font-weight: 700;
+  padding: 0.5rem 0.9rem;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.championConnections-difficultyTab:hover {
+  color: var(--app-text);
+  transform: translateY(-1px);
+}
+
+.championConnections-difficultyTab.is-active {
+  background: linear-gradient(135deg, rgba(255, 190, 84, 0.92), rgba(91, 159, 255, 0.9));
+  color: #0c1220;
+}
+
+.championConnections-tags {
+  gap: 0.45rem;
+}
+
+.championConnections-tag {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 999px;
+  color: var(--app-text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+}
+
+.championConnections-tag--hidden {
+  color: var(--app-muted);
+}
+
+.championConnections-actions {
+  margin-left: auto;
+}
+
+.championConnections-reset {
+  min-width: 140px;
+}
+
+.championConnections-unitCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.championConnections-cardTraits,
+.championConnections-choiceTraits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.championConnections-cardTrait,
+.championConnections-choiceTrait {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  color: var(--app-text);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.28rem 0.55rem;
+}
+
+.championConnections-choice {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
+  text-align: left;
+}
+
+.championConnections-choiceMeta {
+  color: var(--app-muted);
+  font-size: 0.86rem;
+}
+
+.championConnections-empty {
+  color: var(--app-muted);
+  margin: 0;
+  text-align: left;
+}
+
+.championConnections-path {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.championConnections-pathStep {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  text-align: left;
+}
+
+.championConnections-pathName {
+  color: var(--app-text);
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.championConnections-pathTags {
+  color: var(--app-muted);
+  display: block;
+  font-size: 0.9rem;
+}
+
+.championConnections-success {
+  margin-bottom: 0;
+}
+
+.championConnections-shortestPath {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+}
+
+.championConnections-shortestStep {
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  color: var(--app-text);
+  display: inline-flex;
+  flex-direction: column;
+  font-weight: 700;
+  gap: 0.2rem;
+  padding: 0.45rem 0.8rem;
+}
+
+.championConnections-shortestTraits {
+  color: var(--app-muted);
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+.championConnections-arrow {
+  color: var(--app-accent-soft);
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .championConnections-toolbar {
+    justify-content: stretch;
+  }
+
+  .championConnections-difficulty {
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .championConnections-difficultyTabs {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .championConnections-difficultyTab {
+    flex: 1 1 0;
+  }
+}

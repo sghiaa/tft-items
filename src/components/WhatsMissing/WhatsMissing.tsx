@@ -1,72 +1,150 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import ItemButton from '../ItemButton/ItemButton';
 import { Container, Row, Col } from 'react-bootstrap';
-import { baseItems, completedItems } from '../../data';
 import ItemIcon from '../ItemIcon/ItemIcon';
 import styles from './WhatsMissing.module.css';
-import { Link } from 'react-router-dom';
 import Footer from '../Footer/Footer';
+import { gameDataBySet } from '../../gameData';
+import { useSelectedSet } from '../../setSelection';
 
-const WhatsMissing = () => {
-  const item = Math.floor(Math.random() * 45);
-  const component = Math.floor(Math.random() * 2);
+  const WhatsMissing = () => {
+  const { selectedSet } = useSelectedSet();
+  const { baseItems, completedItems } = gameDataBySet[selectedSet];
+  const getRandomPrompt = useCallback(() => {
+    const itemIndex = Math.floor(Math.random() * completedItems.length);
+    const componentIndex = Math.floor(Math.random() * 2);
+
+    return {
+      item: completedItems[itemIndex],
+      existingComponent: baseItems[completedItems[itemIndex].components[componentIndex]],
+    };
+  }, [baseItems, completedItems]);
   const [streak, setStreak] = useState(0);
   const [record, setRecord] = useState(0);
-
-  const success = () => {
-    setStreak(streak + 1);
-  };
-
-  useEffect(() => {
-    if (streak > record) {
-      setRecord(streak);
-    }
-  }, [streak, record]);
-
-  const failure = () => {
-    setStreak(0);
-  };
+  const [prompt, setPrompt] = useState(getRandomPrompt);
+  const [answerState, setAnswerState] = useState<null | {
+    correctId: number;
+    isCorrect: boolean;
+    selectedId: number;
+  }>(null);
 
   const checkAnswer = (targetItem, existing, answer) => {
-    if (
+    if (answerState) {
+      return;
+    }
+
+    const isCorrect =
       (targetItem.components[0] === existing.id && targetItem.components[1] === answer.id) ||
-      (targetItem.components[0] === answer.id && targetItem.components[1] === existing.id)
-    ) {
-      success();
+      (targetItem.components[0] === answer.id && targetItem.components[1] === existing.id);
+
+    const correctId = targetItem.components.find((componentId) => componentId !== existing.id) ?? existing.id;
+
+    if (isCorrect) {
+      setStreak((currentStreak) => {
+        const nextStreak = currentStreak + 1;
+        setRecord((currentRecord) => Math.max(currentRecord, nextStreak));
+        return nextStreak;
+      });
+      setPrompt(getRandomPrompt());
     } else {
-      failure();
+      setStreak(0);
+      setAnswerState({
+        correctId,
+        isCorrect,
+        selectedId: answer.id,
+      });
     }
   };
 
+  const nextPrompt = () => {
+    setAnswerState(null);
+    setPrompt(getRandomPrompt());
+  };
+
+  React.useEffect(() => {
+    setStreak(0);
+    setRecord(0);
+    setAnswerState(null);
+    setPrompt(getRandomPrompt());
+  }, [selectedSet, getRandomPrompt]);
+
   return (
-    <div className="App">
-      <h1>
-        streak: {streak} (record: {record})
-      </h1>
+    <div className="appPage">
+      <div className="pageIntro">
+        <div className="pageEyebrow">Recognition Drill</div>
+        <h1 className="pageTitle">Spot the missing component</h1>
+        <p className="pageDescription">You know the item you want and one component you already have. Pick the missing piece as fast as you can and build a streak.</p>
+      </div>
 
-      <Container>
-        <Row className={`${styles.targetRow} p-2`}>
-          <Col xs={7} style={{ textAlign: 'right' }} className="p-2">
-            You want: {completedItems[item].name} <ItemIcon name={completedItems[item].name} icon={completedItems[item].icon} />
-          </Col>
+      <Container className={styles.pageCard}>
+        <div className="statsRow">
+          <div className="statChip">
+            <span className="statChip-label">Current streak</span>
+            <span className="statChip-value">{streak}</span>
+          </div>
+          <div className="statChip">
+            <span className="statChip-label">Record</span>
+            <span className="statChip-value">{record}</span>
+          </div>
+        </div>
 
-          <Col xs={7} style={{ textAlign: 'right' }} className="p-2">
-            You have: <ItemIcon name={baseItems[completedItems[item].components[component]].name} icon={baseItems[completedItems[item].components[component]].icon} />
-          </Col>
-        </Row>
+        <div className={styles.promptCard}>
+          <div className="promptPanel">
+            <div className="promptPanel-section">
+              <span className="promptPanel-label">Target item</span>
+              <span className="promptPanel-value">{prompt.item.name} <ItemIcon name={prompt.item.name} icon={prompt.item.icon} /></span>
+            </div>
+            <div className="promptPanel-section">
+              <span className="promptPanel-label">Current component</span>
+              <span className="promptPanel-value"><ItemIcon name={prompt.existingComponent.name} icon={prompt.existingComponent.icon} /> {prompt.existingComponent.name}</span>
+            </div>
+          </div>
+        </div>
 
-        <Row className="p-4">
-          <div className="px-2 mb-2">Which item should you take?</div>
+        <div className="appCard appCard--accent">
+          {answerState && !answerState.isCorrect && (
+            <div className="appCard feedbackBanner is-incorrect">
+              <div className="feedbackBanner-copy">
+                <h3 className="feedbackBanner-title">Not quite</h3>
+                <div className="feedbackAnswer">
+                  <ItemIcon
+                    name={baseItems[answerState.correctId].name}
+                    icon={baseItems[answerState.correctId].icon}
+                  />
+                  <p className="feedbackBanner-text">The right component was {baseItems[answerState.correctId].name}.</p>
+                </div>
+              </div>
+              <Button className="nextButton" onClick={nextPrompt}>Next</Button>
+            </div>
+          )}
+          <h2 className="panelTitle">Which item should you take?</h2>
+          <p className="panelDescription">Choose the second component that completes the recipe{answerState ? ', then press Next for a new prompt.' : '.'}</p>
+          <Row className={styles.choiceRow}>
+            {baseItems.map((i) => {
+              const answerClassName = answerState
+                ? [
+                    'quizAnswer',
+                    answerState.correctId === i.id ? 'quizAnswer--correct' : '',
+                    answerState.selectedId === i.id && !answerState.isCorrect ? 'quizAnswer--incorrect' : '',
+                    answerState.correctId !== i.id && answerState.selectedId !== i.id ? 'quizAnswer--dimmed' : '',
+                  ].filter(Boolean).join(' ')
+                : '';
 
-          {baseItems.map((i) => {
-            return (
-              <Col key={i.id}>
-                <ItemButton answer={i} onClick={() => checkAnswer(completedItems[item], baseItems[completedItems[item].components[component]], i)} />
-              </Col>
-            );
-          })}
-        </Row>
+              return (
+                <Col key={i.id} xs={4} sm={3} md={2} lg={1}>
+                  <ItemButton
+                    answer={i}
+                    className={answerClassName}
+                    disabled={Boolean(answerState)}
+                    onClick={() => checkAnswer(prompt.item, prompt.existingComponent, i)}
+                  />
+                </Col>
+              );
+            })}
+          </Row>
+        </div>
+
       </Container>
       <div>
         <Footer page="whats-missing" />

@@ -1,4 +1,7 @@
 .thumbnail {
-  width: 64px;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
   height: 64px;
+  object-fit: cover;
+  width: 64px;
 }

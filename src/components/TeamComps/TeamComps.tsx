@@ -1,47 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useState } from 'react';
-import ItemButton from '../ItemButton/ItemButton';
 import {Container, Row, Col} from 'react-bootstrap';
-import ItemIcon from '../ItemIcon/ItemIcon';
-import { Link } from 'react-router-dom';
-import Papa from 'papaparse';
 import Footer from '../Footer/Footer';
-
-type Tag = "gadgeteen" |
-  "heart" |
-  "brawler" |
-  "starguardian" |
-  "defender" |
-  "aegis" |
-  "mascot" |
-  "animasquad" |
-  "threat" |
-  "spellslinger" |
-  "duelist" |
-  "recon" |
-  "renegade" |
-  "oxforce" |
-  "mechaprime" |
-  "underground" |
-  "supers" |
-  "prankster" |
-  "admin" |
-  "hacker" |
-  "lasercorps" |
-  "corrupted" |
-  "sureshot" |
-  "arsenal" |
-  "civilian" |
-  "ace" |
-  "forecaster" 
+import './TeamComps.css';
+import { useSelectedSet } from '../../setSelection';
+import { Champion, loadChampionsForSet, Tag } from '../../championData';
 
 type Frequencies = Map<Tag, number>
-
-type Champion = {
-  name: string;
-  tier: number;
-  tags: Array<Tag>;
-}
 
 const findChampionsWithMostSharedTags = (allChampions: Champion[], teamChampions: Champion[]): Champion[] => {
   const tagFrequencies: Frequencies = new Map();
@@ -95,25 +60,15 @@ const findChampionsWithMostSharedTags = (allChampions: Champion[], teamChampions
 }
 
 const TeamComps = () => {
+  const { selectedSet } = useSelectedSet();
   const [ data, setData ] = useState<Array<Champion>>();
-  const load = function(){
-    fetch( './tft_unit_data.csv' )
-        .then( response => response.text() )
-        .then( body => Papa.parse(body, {header: true}))
-        .then( data => data.data.map((row) => { 
-          const tags = Object.keys(row).map((tag) => {
-            if(row[tag] === "x") {
-              return tag;
-            }
-          }).filter((val) => val !== undefined )
-          return { name: row.name, tier: row.tier, tags: tags }
-        }))
-        .then( csv => setData(csv) )
-  };
+  const load = useCallback(() => {
+    loadChampionsForSet(selectedSet).then((champions) => setData(champions));
+  }, [selectedSet]);
 
   useEffect(() => {
     load();
-  }, []);
+  }, [load]);
   
   const [champions, setChampions] = useState<Array<Champion>>([]);
   const [frequencies, setFrequencies] = useState<Frequencies>();
@@ -149,15 +104,32 @@ const TeamComps = () => {
       setTargets(t)
     }
   }, [data, champions])
+
+  useEffect(() => {
+    setChampions([]);
+    setFrequencies(undefined);
+    setTargets(undefined);
+  }, [selectedSet]);
+
+  const sortedFrequencies = frequencies
+    ? Array.from(frequencies.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    : [];
+
   return (
-    <div className="App">
-      <Container className="gameArea">
-        <Row className="teamSelection">
-          <h2 className="teamSelection-title">Who is on your team?</h2>
+    <div className="appPage">
+      <div className="pageIntro">
+        <div className="pageEyebrow">Team Builder</div>
+        <h1 className="pageTitle">Find the next unit for your board</h1>
+        <p className="pageDescription">Add the champions you already have and this tool highlights the units that share the most tags with your current team.</p>
+      </div>
+      <Container className="teamCompPage">
+        <Row className="teamSelection appCard appCard--accent">
+          <h2 className="panelTitle">Who is on your team?</h2>
+          <p className="panelDescription">Tap champions to add them to your board. Tap them again in your team list to remove them.</p>
           <Row className="championSelection">
             {data && data.map((i, index) => {
               return (
-                <Col xs={3} key={index}>
+                <Col xs={6} md={4} lg={3} key={index}>
                   <button className="championSelection-button" onClick={() => addChampion(i)}>{i.name}</button>
                 </Col>
               )
@@ -165,20 +137,21 @@ const TeamComps = () => {
           </Row>
           <Row className="team">
             <div className="team-title">
-              <h3>Team:</h3>
+              <h3 className="panelTitle">Current team</h3>
             </div>
             {champions.map((i, index) => {
               return (
-                <Col xs={3} key={index}>
+                <Col xs={6} md={4} lg={3} key={index}>
                   <button className="team-button" onClick={() => removeChampion(index)}>{i.name}</button>
                 </Col>
               )
             })}
           </Row>
         </Row>
-        <Row className="suggestedChampions">
+        <Row className="suggestedChampions appCard">
           <div className="suggestedChampions-content">
-            <h2>Suggested Champions</h2>
+            <h2 className="panelTitle">Suggested Champions</h2>
+            <p className="panelDescription">These picks overlap with the tags already on your board.</p>
             {targets && frequencies && targets.map(champion => {
               const matchingTags = champion.tags.filter(tag => frequencies.has(tag));
               const matchingTagsString = matchingTags.join(", ");
@@ -186,39 +159,18 @@ const TeamComps = () => {
             })}
           </div>
         </Row>
-        <Row className="currentTeamTags">
+        <Row className="currentTeamTags appCard">
           <div className="currentTeamTags-title">
-            <h2>Current team tags:</h2>
+            <h2 className="panelTitle">Current team tags</h2>
+            <p className="panelDescription">Use the frequency board to see which traits you are already leaning into.</p>
           </div>
           {frequencies && 
               <Row className="currentTeamTags-tags">
-                <Col xs={2} className="currentTeamTags-tag">Gadgeteen: {frequencies.get("gadgeteen") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Heart: {frequencies.get("heart") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Brawler: {frequencies.get("brawler") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">StarGuardian: {frequencies.get("starguardian") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Defender: {frequencies.get("defender") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Aegis: {frequencies.get("aegis") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Mascot: {frequencies.get("mascot") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">AnimaSquad: {frequencies.get("animasquad") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Threat: {frequencies.get("threat") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Spellslinger: {frequencies.get("spellslinger") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Duelist: {frequencies.get("duelist") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Recon: {frequencies.get("recon") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Renegade: {frequencies.get("renegade") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">OxForce: {frequencies.get("oxforce") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">MechaPrime: {frequencies.get("mechaprime") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Underground: {frequencies.get("underground") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Supers: {frequencies.get("supers") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Prankster: {frequencies.get("prankster") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Admin: {frequencies.get("admin") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Hacker: {frequencies.get("hacker") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Lasercorps: {frequencies.get("lasercorps") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Corrupted: {frequencies.get("corrupted") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Sureshot: {frequencies.get("sureshot") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Arsenal: {frequencies.get("arsenal") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Civilian: {frequencies.get("civilian") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Ace: {frequencies.get("ace") || 0}</Col>
-                <Col xs={2} className="currentTeamTags-tag">Forecaster: {frequencies.get("forecaster") || 0}</Col>
+                {sortedFrequencies.map(([tag, count]) => (
+                  <Col xs={6} md={4} lg={3} key={tag} className="currentTeamTags-tag">
+                    {tag.replace(/_/g, ' ')}: {count}
+                  </Col>
+                ))}
               </Row>
           }
         </Row>
